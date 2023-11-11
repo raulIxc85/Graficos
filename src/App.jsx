@@ -9,16 +9,17 @@ import Analytics from "./components/pages/Analytics";
 export default function App() {
   return (
     <>
-       <div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/analytics" element={<Analytics/>} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </Router>
-    </div>
+      <div>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/clientes" element={<Products />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </Router>
+      </div>
     </>
   )
 }

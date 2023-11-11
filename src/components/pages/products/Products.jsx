@@ -2,7 +2,7 @@
 import NavBar from '../../nav/NavBar';
 import SideNav from '../../nav/SideNav'
 import Box from '@mui/material/Box';
-import ProductList from './ProductList';    
+import ProductList from './ProductList';
 
 export default function Products() {
 
@@ -13,7 +13,7 @@ export default function Products() {
       <Box sx={{ display: 'flex' }}>
         <SideNav />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <ProductList/>
+          <ProductList />
         </Box>
       </Box>
 
