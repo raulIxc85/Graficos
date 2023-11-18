@@ -11,7 +11,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { db } from "../../../firebase-config"; // importamos la conexion a firebase
 import { collection, addDoc, getDocs } from "firebase/firestore"; // importamos los metodos de firebase para agregar, actualizar y eliminar documentos
 import Swal from 'sweetalert2';
-import { useAppStore } from '../../../appStore'; // importamos el store de zustand
+import { useAppStore } from '../../../appStore'; // importamos el store de zustand: useAppStore
 
 
 export default function AddProducts({ closeEvent }) {
@@ -75,7 +75,7 @@ export default function AddProducts({ closeEvent }) {
         Swal.fire("Success", "Product Added Successfully", "success");
 
         //recargar la pagina
-        window.location.reload();
+        //        window.location.reload();
 
 
     }

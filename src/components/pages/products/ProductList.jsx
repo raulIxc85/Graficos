@@ -34,6 +34,10 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Modal from '@mui/material/Modal';
 import AddProducts from './AddProducts';
+import EditProducts from './EditProducts';
+import { useAppStore } from '../../../appStore'; // importamos el store de zustand: useAppStore y setRows zustand store: estado global de la aplicacion 
+import Skeleton from '@mui/material/Skeleton';
+
 
 
 
@@ -52,14 +56,18 @@ const style = {
 
 export default function ProductList() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10); // 10, 25, 100
-  const [rows, setRows] = useState([]); // traer los datos de firebase y guardarlos en rows
-
+  const [rowsPerPage, setRowsPerPage] = useState(10); // 10, 25, 100 // cantidad de filas por pagina
   const empCollectionRef = collection(db, "products"); // referencia a la coleccion de firebase
-
+  const [formid, setFormid] = useState("");
   const [open, setOpen] = useState(false);
+  const [editopen, setEditOpen] = useState(false);
   const handleOpen = () => setOpen(true); // funcion para abrir el modal
+  const handleEditOpen = () => setEditOpen(true); // funcion editar 
   const handleClose = () => setOpen(false);
+  const handleEditClose = () => setEditOpen(false);
+
+  const setRows = useAppStore((state) => state.setRows); // traer los datos de firebase y guardarlos en rows
+  const rows = useAppStore((state) => state.rows); // traer los datos de firebase y guardarlos en rows
 
   useEffect(() => {
     getUsers();
@@ -112,10 +120,23 @@ export default function ProductList() {
     }
   };
 
+  // -------------- Editar datos -----------------
+
+  const editData = (id, name, price, category) => {
+    const data = { // guardar los datos en un objeto para enviarlos al componente EditUsers
+      id: id,
+      name: name,
+      price: price,
+      category: category
+    }
+    setFormid(data);
+    handleEditOpen();
+  }
 
   return (
     <>
       <div>
+        {/* Modal para Crear producto */}
         <Modal
           open={open}
           //onClose={handleClose}
@@ -124,6 +145,18 @@ export default function ProductList() {
         >
           <Box sx={style}>
             <AddProducts closeEvent={handleClose} />
+          </Box>
+        </Modal>
+
+        {/* Modal para Editar producto */}
+        <Modal
+          open={editopen}
+          //onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <EditProducts closeEvent={handleEditClose} fid={formid} />
           </Box>
         </Modal>
       </div>
@@ -223,11 +256,13 @@ export default function ProductList() {
                             <EditIcon
                               style={{
                                 fontSize: "20px",
-                                color: "blue",
+                                color: "darkblue",
                                 cursor: "pointer",
                               }}
                               className="cursor-pointer"
-                            // onClick={() => editUser(row.id)}
+                              onClick={() =>
+                                editData(row.id, row.name, row.price, row.category)
+                              }
                             />
                             <DeleteIcon
                               style={{
@@ -257,7 +292,28 @@ export default function ProductList() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-      )
-      }</>
+      )}
+      {
+        rows.length === 0 && (
+          <>
+            <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
+              <Box height={20} />
+              <Skeleton variant='retangular' width={'100%'} height={30} />
+              <Box height={40} />
+              <Skeleton variant='retangular' width={'100%'} height={60} />
+              <Box height={20} />
+              <Skeleton variant='retangular' width={'100%'} height={60} />
+              <Box height={20} />
+              <Skeleton variant='retangular' width={'100%'} height={60} />
+              <Box height={20} />
+              <Skeleton variant='retangular' width={'100%'} height={60} />
+              <Box height={20} />
+              <Skeleton variant='retangular' width={'100%'} height={60} />
+              <Box height={20} />
+            </Paper>
+          </>
+        )
+      }
+    </>
   );
 }
