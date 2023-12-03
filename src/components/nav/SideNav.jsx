@@ -24,6 +24,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import StoreIcon from '@mui/icons-material/Store';
 
 const drawerWidth = 240;
 
@@ -180,6 +181,28 @@ export default function SideNav() {
                 <AnalyticsIcon />
               </ListItemIcon>
               <ListItemText primary="Analytics" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+
+          {/* ListItem store */}
+           <ListItem sx={{ display: 'block' }} onClick={() => { navigate("/store") }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <StoreIcon />
+              </ListItemIcon>
+              <ListItemText primary="Store" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
 

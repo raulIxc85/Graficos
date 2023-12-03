@@ -10,7 +10,6 @@ export default function PopulationChart() {
       const response = await fetch(url);
       const data = await response.json();
       setApiData(data.data);
-      console.log(data.data)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -23,7 +22,7 @@ export default function PopulationChart() {
 
   const chartData = [
     ["Año", "Población"],
-    ...apiData.map((item) => [item.Year, item.Population]), // ... es un spread operator que permite expandir un array
+    ...apiData.map((item) => [item.Year, item.Population]), 
   ];
 
 
