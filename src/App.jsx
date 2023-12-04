@@ -3,6 +3,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Settings from "./components/pages/Settings";
 import Products from "./components/pages/products/Products";
+import Clients from "./components/pages/clients/Clients";
 import Home from "./components/pages/Home";
 import Analytics from "./components/pages/Analytics";
 import Shopping from './components/pages/Shopping';
@@ -17,7 +18,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/clientes" element={<Products />} />
+            <Route path="/clientes" element={<Clients />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/store" element={<Store />} />
             <Route path="/settings" element={<Settings />} />
